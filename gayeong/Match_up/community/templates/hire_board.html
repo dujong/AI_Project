@@ -1,0 +1,15 @@
+{% extends 'communitylayout/post_view.html' %}
+
+{% block title %}hire_board{% endblock %}
+
+{% block write %}
+
+    {% if user.is_authenticated %}
+    <form action = "" method = "GET">
+    <div class="container-fluid">
+        <a class="btn btn-primary" href="{% url 'community:createPost_hire'%}" role="button" style = "float: right; margin-top: 0.3rem; margin-bottom:1rem;">글쓰기</a>
+    </div>
+    </form>
+    {% endif %}
+
+{% endblock %}

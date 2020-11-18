@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign in{% endblock %}
+
+{% block sty %} 
+
+<style> 
+body { background: #C5E1A5; } 
+.led { width: 100%; margin: 30px auto; background: #efefef; text-align: center; color: rgb(63, 63, 63); font-family: sans-serif; transition: ease .3s;}
+form { width: 60%; margin: 60px auto; background: #efefef; padding: 60px 120px 80px 120px; text-align: center; -webkit-box-shadow: 2px 2px 3px rgba(0,0,0,0.1); box-shadow: 2px 2px 3px rgba(0,0,0,0.1); } 
+label { display: block; position: relative; margin: 40px 0px; } 
+.label-txt { position: absolute; top: -1.6em; padding: 10px; font-family: sans-serif; font-size: .8em; letter-spacing: 1px; color: rgb(63, 63, 63); transition: ease .3s; } 
+.input { width: 100%; padding: 10px; background: transparent; border: none; outline: none; } 
+.line-box { position: relative; width: 100%; height: 2px; background: #BCBCBC; } 
+.line { position: absolute; width: 0%; height: 2px; top: 0px; left: 50%; transform: translateX(-50%); background: #8BC34A; transition: ease .6s; } 
+.input:focus + .line-box .line { width: 100%; } 
+.label-active { top: -3em; } 
+.container-txt {display: block; position: relative; margin: 20px 0px; }
+button { display: inline-block; padding: 12px 24px; background: rgb(220,220,220); font-weight: bold; color: rgb(120,120,120); border: none; outline: none; border-radius: 3px; cursor: pointer; transition: ease .3s; } 
+button:hover { background: #8BC34A; color: #ffffff; } 
+</style>
+
+
+
+{% endblock %}
+
+{% block content %} 
+<!--
+<div>
+<form>
+  <p></p>
+  <br>
+  <div class = "container">
+    <div class = "container">
+      <div class = "container">
+      <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1">
+      </div>
+      <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+      </div>
+      <button type="submit" class="btn btn-primary">로그인</button>
+    </div>
+  </div>
+  </div>
+</form>
+</div>
+-->
+
+<div class = "led">
+  <h3>회원가입</h3>
+  <h5 style="color: red;">{{error}}</h5>
+  {% if messages %}    
+    {% for message in messages %}
+      <h5>{{ message }}</h5>
+    {% endfor %}
+  {% endif %}
+
+
+</div>
+
+<form action = "{% url 'account:sign_up' %}" method = "POST"> 
+  {% csrf_token %}
+
+    <label>
+      <div class="form-group">
+        <p class="label-txt">ID</p> 
+          <input type="text" class="input" name = "user_id">
+          <div class="line-box">
+          <div class="line">
+
+          </div>
+          </div> 
+      </div>
+    </label>
+
+    <label>
+        <p class="label-txt">PASSWORD1</p> <td></td>
+        <input type="password" class="input" name = "password1">
+        <div class="line-box"> 
+            <div class="line">
+            </div> 
+        </div> 
+    </label> 
+
+    <label>
+      <p class="label-txt">PASSWORD2</p> <td></td>
+      <input type="password" class="input" name = "password2">
+      <div class="line-box"> 
+          <div class="line">
+          </div> 
+      </div> 
+  </label> 
+
+    <label>
+      <p class="label-txt">nick_name</p>
+      <div class = "container-txt">
+        <p>{{ form.user_name }}</p>
+      </div>
+  </label> 
+
+    <label>
+      <p class="label-txt">Email</p>
+      <div class = "container-txt">
+        <p>{{ form.email }}</p>
+      </div>
+  </label> 
+
+  <label>
+    <p class="label-txt">Phone</p> 
+    <div class = "container-txt">
+      <p>{{ form.phone }}</p>
+    </div>
+</label> 
+
+    <label>
+        <p class="label-txt">F_Region</p><br>
+        <div class = "container">
+        <button class="btn btn-secondary" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          {{ form.f_region}}
+        </button>
+       </div>
+    </label>
+    <p></p>
+
+    <button type="submit">Create</button> 
+</form> 
+
+
+<script> $(document).ready(function(){ 
+    $('.input').focus(function(){
+      $(this).parent().find(".label-txt").addClass('label-active'); 
+    }); 
+
+    $(".input").focusout(function(){ if ($(this).val() == ''){ 
+      $(this).parent().find(".label-txt").removeClass('label-active'); 
+    }; 
+  }); 
+  
+  }); 
+  
+</script>
+
+{% endblock %}

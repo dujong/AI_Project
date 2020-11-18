@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Post{% endblock %}
+
+{% block sty %} 
+
+{% endblock %}
+
+{% block content %} 
+
+
+  <div class = container style="position:relative">
+
+    {{form.title}}
+    {{form.title_image}}
+    {{form.content}}
+
+    <form action = "" method = "POST">
+      {% csrf_token %}
+      <a class="btn btn-primary" role="button" href = "{% url 'community:createPost' %}" style = "float: right; margin-top: 0.3rem; margin-bottom:1rem;">글쓰기</a>
+    </form>
+
+  </div>
+
+  
+
+
+{% endblock %}
